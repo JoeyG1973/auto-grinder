@@ -1,7 +1,6 @@
 #include <FastAccelStepper.h>
 #include <Bounce2.h>
 #include <LiquidCrystal_I2C.h>
-
 #include <SmoothProgress.h>
 #define BAR_STYLES_IN_PROGMEM
 #include <BarStyleV2.h>
@@ -12,7 +11,7 @@
 #define X_STEP_PIN 6
 #define X_DIR_PIN 5
 #define X_ENA_PIN 4
-#define X_MAX_SPEED 22000// in hertz/steps
+#define X_MAX_SPEED 30000 // in hertz/steps
 #define X_POTPIN A0
 #define X_ENABLE_SWITCH_PIN 3
 
@@ -52,11 +51,11 @@ uint32_t X_pot_map = 0;
 uint32_t Y_pot_map = 0;
 uint32_t X_pot_EMA_S = 0;
 uint32_t Y_pot_EMA_S = 0;
-uint32_t Y_step_with_dir = 0;
+int32_t Y_step_with_dir = 0;
 int barX = 0, barY = 0;
 char buffer[16];
 bool startup = true;
-bool Y_limit_switch_front_trip = true, Y_limit_switch_rear_trip = false;
+bool Y_limit_switch_front_trip = false, Y_limit_switch_rear_trip = false;
 bool X_limit_switch_left_trip = false, X_limit_switch_right_trip = false;
 ////////////////////////
 // lcd global objects //
@@ -144,13 +143,13 @@ void setup()
   lcd.setCursor(10, 2);
   lcd.print("D: ");
   lcd.setCursor(13, 2);
-  lcd.print("Rev");
+  lcd.print("Fwd");
 
-  Serial.begin(115200);
-  Serial.println(Xstepper->getMaxSpeedInUs());
-  Serial.println(Xstepper->getMaxSpeedInTicks());
-  Serial.println(Xstepper->getMaxSpeedInHz());
-  Serial.println(Xstepper->getMaxSpeedInMilliHz());
+//  Serial.begin(115200);
+//  Serial.println(Xstepper->getMaxSpeedInUs());
+//  Serial.println(Xstepper->getMaxSpeedInTicks());
+//  Serial.println(Xstepper->getMaxSpeedInHz());
+//  Serial.println(Xstepper->getMaxSpeedInMilliHz());
 }
 
 
@@ -183,7 +182,7 @@ void loop()
   ///////////
   X_pot_EMA_S = potEMA(X_POTPIN, X_pot_EMA_S);
   X_pot_map = map(X_pot_EMA_S, 0, 1019, 0, X_MAX_SPEED);
-  Serial.println(X_pot_map);
+//  Serial.println(X_pot_map);
   barX = map(X_pot_EMA_S, 0, 1019, 0, 100);
 
   ///////////
@@ -215,15 +214,15 @@ void loop()
   //////////////
   // X toggle //
   //////////////
-
-  if ( X_toggle_switch.isPressed() ) {
+  // don't enable X unless the pot is at 0
+  if ( X_toggle_switch.isPressed() && X_pot_EMA_S == 0 ) {
     Xstepper->enableOutputs();
     lcd.setCursor(3, 1);
-    lcd.print("ON ");
-  } else {
+    lcd.print("ON  ");
+  } else if (X_toggle_switch.isPressed() == false) {
     Xstepper->disableOutputs();
     lcd.setCursor(3, 1);
-    lcd.print("OFF");
+    lcd.print("OFF ");
   }
 
   //////////////
