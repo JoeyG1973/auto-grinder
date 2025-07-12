@@ -6,8 +6,8 @@
 #include <BarStyleV2.h>
 #include <avr/wdt.h>
 
-#define X_LIMIT_SWITCH_LEFT_PIN 51
-#define X_LIMIT_SWITCH_RIGHT_PIN 53
+#define X_LIMIT_SWITCH_LEFT_PIN 18
+#define X_LIMIT_SWITCH_RIGHT_PIN 19
 #define X_STEP_PIN 6
 #define X_DIR_PIN 5
 #define X_ENA_PIN 4
