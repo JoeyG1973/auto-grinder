@@ -4,6 +4,7 @@
 #include <SmoothProgress.h>
 #define BAR_STYLES_IN_PROGMEM
 #include <BarStyleV2.h>
+#include <avr/wdt.h> 
 
 
 #define X_LIMIT_SWITCH_LEFT_PIN 51
@@ -11,20 +12,22 @@
 #define X_STEP_PIN 6
 #define X_DIR_PIN 5
 #define X_ENA_PIN 4
-#define X_MAX_SPEED 30000 // in hertz/steps
+#define X_MAX_SPEED 15000 // in hertz/steps
 #define X_POTPIN A0
 #define X_ENABLE_SWITCH_PIN 3
+#define X_ACCEL 100000
 
 
 #define Y_STEP_PIN 8
 #define Y_DIR_PIN 9
 #define Y_ENA_PIN 10
-#define Y_MAX_SPEED 37558 // in hertz/steps
+#define Y_MAX_SPEED 25000 // in hertz/steps
 #define Y_POTPIN A4
-#define Y_MAX_STEP_OVER 100
+#define Y_MAX_STEP_OVER 24950
 #define Y_ENABLE_SWITCH_PIN 2
 #define Y_LIMIT_SWITCH_FRONT_PIN 50
 #define Y_LIMIT_SWITCH_REAR_PIN 52
+#define Y_ACCEL 200000
 
 ///////////////////////////////////////
 // buttons, switches, sensors objects //
@@ -57,6 +60,7 @@ char buffer[16];
 bool startup = true;
 bool Y_limit_switch_front_trip = false, Y_limit_switch_rear_trip = false;
 bool X_limit_switch_left_trip = false, X_limit_switch_right_trip = false;
+
 ////////////////////////
 // lcd global objects //
 ////////////////////////
@@ -66,7 +70,7 @@ SmoothProgressBar spb1(dispA, 4, 9, 3, 0);
 SmoothProgressBar spb2(dispA, 4, 19, 3, 1);
 
 void setup()
-{
+{ 
   ///////////////////////////////////////////
   // button, switch, sensor, pot, etc init //
   ///////////////////////////////////////////
@@ -106,21 +110,19 @@ void setup()
   Xstepper->setEnablePin(X_ENA_PIN, false);
   Xstepper->setAutoEnable(false);
   Xstepper->setSpeedInHz(0);
-//  Xstepper->setAcceleration(100000);
-  Xstepper->setAcceleration(200000);
+  Xstepper->setAcceleration(X_ACCEL);
 
   Ystepper = engine.stepperConnectToPin(Y_STEP_PIN);
   Ystepper->setDirectionPin(Y_DIR_PIN);
   Ystepper->setEnablePin(Y_ENA_PIN, false);
   Ystepper->setAutoEnable(false);
   Ystepper->setSpeedInHz(Y_MAX_SPEED);
-  Ystepper->setAcceleration(3500);
+  Ystepper->setAcceleration(Y_ACCEL);
 
   //////////////
   // lcd init //
   //////////////
   lcd.init();
-  delay(2000);
   lcd.clear();
   dispA.begin();
 
@@ -134,8 +136,12 @@ void setup()
   lcd.home();
   lcd.setCursor(1, 0);
   lcd.print("X Axis:");
+  lcd.setCursor(3, 1);
+  lcd.print("OFF");
   lcd.setCursor(11, 0);
   lcd.print("Y Axis:");
+  lcd.setCursor(13, 1);
+  lcd.print("OFF");
   lcd.setCursor(0, 2);
   lcd.print("D: ");
   lcd.setCursor(3, 2);
@@ -145,11 +151,10 @@ void setup()
   lcd.setCursor(13, 2);
   lcd.print("Fwd");
 
-//  Serial.begin(115200);
-//  Serial.println(Xstepper->getMaxSpeedInUs());
-//  Serial.println(Xstepper->getMaxSpeedInTicks());
-//  Serial.println(Xstepper->getMaxSpeedInHz());
-//  Serial.println(Xstepper->getMaxSpeedInMilliHz());
+  //////////////
+  // Watchdog //
+  //////////////
+  wdt_enable(WDTO_250MS);
 }
 
 
@@ -218,11 +223,11 @@ void loop()
   if ( X_toggle_switch.isPressed() && X_pot_EMA_S == 0 ) {
     Xstepper->enableOutputs();
     lcd.setCursor(3, 1);
-    lcd.print("ON  ");
+    lcd.print("ON ");
   } else if (X_toggle_switch.isPressed() == false) {
     Xstepper->disableOutputs();
     lcd.setCursor(3, 1);
-    lcd.print("OFF ");
+    lcd.print("OFF");
   }
 
   //////////////
@@ -310,7 +315,7 @@ void loop()
 
   }
 
-
+  wdt_reset();
   delay(1);
 
 }
