@@ -11,17 +11,17 @@
 #define X_STEP_PIN 6
 #define X_DIR_PIN 5
 #define X_ENA_PIN 4
-#define X_MAX_SPEED 10000 // in hertz/steps
+#define X_MAX_SPEED 15000 // in hertz/steps
 #define X_POTPIN A0
 #define X_ENABLE_SWITCH_PIN 3
-#define X_ACCEL 150000
+#define X_ACCEL 100000
 
 #define Y_STEP_PIN 8
 #define Y_DIR_PIN 9
 #define Y_ENA_PIN 10
 #define Y_MAX_SPEED 25000 // in hertz/steps
 #define Y_POTPIN A4
-#define Y_MAX_STEP_OVER 10000
+#define Y_MAX_STEP_OVER 24950
 #define Y_ENABLE_SWITCH_PIN 2
 #define Y_LIMIT_SWITCH_FRONT_PIN 50
 #define Y_LIMIT_SWITCH_REAR_PIN 52
@@ -73,11 +73,11 @@ void setup()
   // button, switch, sensor, pot, etc init //
   ///////////////////////////////////////////
   X_limit_switch_left.attach(X_LIMIT_SWITCH_LEFT_PIN, INPUT);
-  X_limit_switch_left.interval(1);
+  X_limit_switch_left.interval(5);
   X_limit_switch_left.setPressedState(HIGH);
 
   X_limit_switch_right.attach(X_LIMIT_SWITCH_RIGHT_PIN, INPUT);
-  X_limit_switch_right.interval(1);
+  X_limit_switch_right.interval(5);
   X_limit_switch_right.setPressedState(HIGH);
 
   X_toggle_switch.attach(X_ENABLE_SWITCH_PIN, INPUT_PULLUP);
