@@ -1,0 +1,37 @@
+# GitHub Pages configuration for Auto Grinder File Server
+title: Auto Grinder File Server
+description: Simple file server for Auto Grinder project files and Arduino code
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Include files that would normally be excluded
+include:
+  - "*.ino"
+  - "*.txt"
+  - "*.md"
+
+# Exclude unnecessary files from the build
+exclude:
+  - .git/
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# File serving settings
+defaults:
+  - scope:
+      path: "files"
+    values:
+      layout: 
+      sitemap: false

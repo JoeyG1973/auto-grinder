@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Grinder File Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-item {
+            background-color: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .file-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .file-item a:hover {
+            color: #007bff;
+        }
+        .file-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .arduino-files {
+            margin-top: 30px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .download-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Auto Grinder File Server</h1>
+        <p>Welcome to the Auto Grinder project file server. Here you can download project files, documentation, and Arduino code.</p>
+        
+        <h2>📁 Available Files</h2>
+        <ul class="file-list">
+            <li class="file-item">
+                <a href="files/" target="_blank">📂 Project Files Directory</a>
+                <div class="file-description">Browse all downloadable project files, schematics, and documentation</div>
+            </li>
+        </ul>
+
+        <div class="arduino-files">
+            <h2>🎛️ Arduino Code</h2>
+            <ul class="file-list">
+                <li class="file-item">
+                    <a href="auto_grinderv7.ino" target="_blank">auto_grinderv7.ino</a>
+                    <div class="file-description">Latest version of the Auto Grinder Arduino code</div>
+                    <a href="auto_grinderv7.ino" download class="download-btn">Download</a>
+                </li>
+                <li class="file-item">
+                    <a href="grinder_autov5.ino" target="_blank">grinder_autov5.ino</a>
+                    <div class="file-description">Previous version of the Auto Grinder Arduino code</div>
+                    <a href="grinder_autov5.ino" download class="download-btn">Download</a>
+                </li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center; color: #666; font-size: 0.9em;">
+            <p>Powered by GitHub Pages | <a href="https://github.com/JoeyG1973/auto-grinder" target="_blank">View Source Code</a></p>
+        </div>
+    </div>
+</body>
+</html>

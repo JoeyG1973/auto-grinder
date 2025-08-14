@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Files - Auto Grinder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .back-link {
+            color: #007bff;
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-item {
+            background-color: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .file-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .file-item a:hover {
+            color: #007bff;
+        }
+        .file-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .download-btn:hover {
+            background-color: #218838;
+        }
+        .upload-info {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+        .upload-info h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Back to Home</a>
+        <h1>📁 Project Files</h1>
+        <p>This directory contains downloadable files for the Auto Grinder project.</p>
+        
+        <ul class="file-list">
+            <li class="file-item">
+                <a href="example.txt" target="_blank">📄 example.txt</a>
+                <div class="file-description">Example text file demonstrating file serving capability</div>
+                <a href="example.txt" download class="download-btn">Download</a>
+            </li>
+            <li class="file-item">
+                <a href="README.txt" target="_blank">📄 README.txt</a>
+                <div class="file-description">Instructions for adding files to this directory</div>
+                <a href="README.txt" download class="download-btn">Download</a>
+            </li>
+        </ul>
+
+        <div class="upload-info">
+            <h3>Adding Files</h3>
+            <p>To add files to this directory:</p>
+            <ol>
+                <li>Upload files to the <code>files/</code> directory in your GitHub repository</li>
+                <li>Files will be automatically served at <code>https://your-username.github.io/your-repo/files/filename</code></li>
+                <li>Update this index.html file to add links to new files</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

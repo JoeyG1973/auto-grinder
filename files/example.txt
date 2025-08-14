@@ -1,0 +1,18 @@
+This is an example file to demonstrate the file serving capability of GitHub Pages.
+
+You can place any type of file in the files/ directory and it will be served to users who visit your GitHub Pages site.
+
+Supported file types include:
+- Text files (.txt, .md, .log)
+- Images (.png, .jpg, .gif, .svg)
+- Documents (.pdf, .docx)
+- Archives (.zip, .tar.gz)
+- Code files (.ino, .cpp, .h, .py, .js)
+- And many more!
+
+To add new files:
+1. Upload them to the files/ directory in your repository
+2. Commit and push the changes
+3. The files will be available at: https://your-username.github.io/your-repo/files/filename
+
+Created: $(date)
